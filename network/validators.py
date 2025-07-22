@@ -13,15 +13,13 @@ def check_supplier_chain(network_point):
         if level_network > 3:
             raise ValidationError(
                 "Цепочка поставщиков не может быть более трех уровней."
-            )  # Использование
+            )
 
-        # Логика для проверки допустимых связей
         if (network_point.level == "retail" and current.level == "entrepreneur") or (
             network_point.level == "entrepreneur" and current.level == "retail"
         ):
-            return True  # Допустимая связь между "Розничной сетью" и "ИП"
+            return True
 
-        # Логика для тройной вложенности (Завод → Розничная сеть → ИП и Завод → ИП → Розничная сеть)
         if (
             network_point.level == "retail"
             and current.level == "factory"
@@ -33,9 +31,8 @@ def check_supplier_chain(network_point):
             and current.supplier
             and current.supplier.level == "retail"
         ):
-            return True  # Допустимая вложенность "Завод → Розничная сеть → ИП"
+            return True
 
-        # Если ничего из этого не подошло, продолжаем искать на следующем уровне
         current = current.supplier
 
-    return True  # Если цепочка не превышает 3 уровня и связи допустимы
+    return True

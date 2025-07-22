@@ -1,12 +1,15 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, filters
-
 from network.models import NetworkPoint, Contact, Product
 from network.serializers import (
     NetworkPointSerializer,
     ContactSerializer,
-    ProductSerializer,
+    ProductSerializer, RegisterSerializer,
 )
+from rest_framework import generics
+from rest_framework.permissions import AllowAny
+from django.contrib.auth.models import User
+
 
 
 class NetworkPointViewSet(viewsets.ModelViewSet):
@@ -31,3 +34,10 @@ class ContactViewSet(viewsets.ModelViewSet):
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    permission_classes = [AllowAny]
+    serializer_class = RegisterSerializer
+
