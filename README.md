@@ -24,7 +24,7 @@
 - **JWT-аутентификация**
 - **CORS headers**
 - **PEP8 / Black / Flake8** — линтинг кода
-- `.env` конфигурации
+- **`.env` конфигурации**
 
 ---
 
@@ -106,27 +106,23 @@ python manage.py runserver
 
 #### Регистрация пользователя
 
-`POST /api/users/register/`
+`POST /[http://localhost:8000/register/]
 
 **Пример запроса:**
 ```json
 {
   "email": "user@example.com",
-  "password": "yourpassword",
-  "password2": "yourpassword"
+  "password": "yourpassword",  
 }
 
 
-Тестовые данные
-
-Для удобства доступна команда для создания суперпользователя:
-
-- **python manage.py csu**
 
 Ограничения
 
     Через API запрещено редактировать поле debt.
 
     Цепочка поставщиков не должна превышать 3 уровня.
+
+    Завод не имеет поставщиков.
 
     Пользователь должен быть активным для получения доступа к API.
